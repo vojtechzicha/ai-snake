@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useEffect } from 'react'
+import './App.css'
 
-function App() {
+import { update, draw } from './engine'
+
+const App = () => {
+  const canvasRef = useRef(null)
+  const [context, setContext] = React.useState(null)
+
+  useEffect(() => {
+    let clean = null,
+      interval = null
+
+    if (canvasRef.current) {
+      if (context === null) {
+        canvasRef.current.width = window.innerWidth - 5
+        canvasRef.current.height = window.innerHeight - 5
+      }
+      const renderCtx = canvasRef.current.getContext('2d')
+
+      if (renderCtx) {
+        interval = setInterval(() => {
+          clean = update(canvasRef.current, renderCtx)
+
+          if (context) {
+            draw(canvasRef.current, renderCtx)
+          }
+        }, 100)
+
+        setContext(renderCtx)
+      }
+    }
+
+    return () => {
+      if (clean !== null && clean !== undefined) {
+        clean()
+      }
+      if (interval !== null) {
+        clearInterval(interval)
+      }
+    }
+  }, [context])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ textAlign: 'center' }}>
+      <canvas id="canvas" ref={canvasRef} width={500} height={500} tabIndex={1}></canvas>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
