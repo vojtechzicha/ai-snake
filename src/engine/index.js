@@ -86,6 +86,7 @@ const update = (canvas, ctx) => {
         // Generate food
         do {
           food = { x: randomInt(TILES), y: randomInt(TILES) }
+          // eslint-disable-next-line no-loop-func
         } while (snake.find(sp => sp.x === food.x && sp.y === food.y) !== undefined)
 
         // Change state
@@ -132,6 +133,7 @@ const update = (canvas, ctx) => {
           // Generate food
           do {
             food = { x: randomInt(TILES), y: randomInt(TILES) }
+            // eslint-disable-next-line no-loop-func
           } while (snake.find(sp => sp.x === food.x && sp.y === food.y) !== undefined)
         }
       } else if (snake.find(sp => sp.x === nextX && sp.y === nextY) !== undefined) {
