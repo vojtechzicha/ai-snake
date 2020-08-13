@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 import './App.css'
 
-import { update, draw } from './engine'
+// import { update, draw } from './engine/manual'
+import { update, draw } from './engine/ai-ui'
 
 const App = () => {
   const canvasRef = useRef(null)
@@ -25,7 +26,7 @@ const App = () => {
           if (context) {
             draw(canvasRef.current, renderCtx)
           }
-        }, 100)
+        }, 60)
 
         setContext(renderCtx)
       }
