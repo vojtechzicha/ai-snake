@@ -20,14 +20,14 @@ const directions = {
   EAST: 3
 }
 
-const evaluate = (snake, x, y, tiles) => {
-  if (x < 0 || x >= tiles || y < 0 || y >= tiles) return 0
-  if (snake.find(sp => sp.x === x && sp.y === y) !== undefined) return 0
-  return 1
-}
+// const evaluate = (snake, x, y, tiles) => {
+//   if (x < 0 || x >= tiles || y < 0 || y >= tiles) return 0
+//   if (snake.find(sp => sp.x === x && sp.y === y) !== undefined) return 0
+//   return 1
+// }
 
 const findFood = (dir, x, y, food, tiles) => {
-  let distance = 0
+  // let distance = 0
   for (
     let ix = x, iy = y;
     ix < tiles && ix >= 0 && iy < tiles && iy >= 0;
@@ -36,8 +36,8 @@ const findFood = (dir, x, y, food, tiles) => {
   ) {
     if (food.x === ix && food.y === iy) {
       break
-    } else {
-      distance += 1
+      // } else {
+      //   distance += 1
     }
   }
   return -1
