@@ -47,7 +47,6 @@ const update = (canvas, ctx) => {
   })
 
   if (keys.length > 0) {
-    console.log(keys)
     const code = keys.pop()
     if (state !== states.WINNER && state !== states.LOSER) {
       switch (code) {
